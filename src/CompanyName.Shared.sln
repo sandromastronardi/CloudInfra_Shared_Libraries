@@ -23,6 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CompanyName.Shared.EventSto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{7324B801-670D-4F28-84C0-37F6C96AFF38}"
 	ProjectSection(SolutionItems) = preProject
+		..\azure-pipelines-dev.yml = ..\azure-pipelines-dev.yml
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		nuget-cache-salt.txt = nuget-cache-salt.txt
 		nuget.config = nuget.config
