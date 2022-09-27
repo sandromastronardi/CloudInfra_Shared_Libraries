@@ -753,6 +753,11 @@ in this case is another collection where all flat objects are stored in CosmosDB
 The Reslilience library helps to create standardised policies for circuit breakers in your services.
 This is currently not complete.
 
+# How to start
+
+You start by doing a search and replace for CompanyName which you replace with your company name...
+this must be done for namespaces, but you must also rename the projects and the folders.
+
 ## Compiling & release
 
 These libraries will be used across your application and must be compiled.
