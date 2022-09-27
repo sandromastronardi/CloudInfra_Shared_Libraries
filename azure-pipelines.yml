@@ -1,0 +1,80 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool: #WinPool
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+  NUGET_PACKAGES: '$(Pipeline.Workspace)/.nuget/packages'
+
+steps:
+- task: CacheBeta@1
+  displayName: Cache nuget packages
+  inputs:
+    key: 'nuget | $(Agent.OS) | $(Build.SourcesDirectory)/**/packages.lock.json,$(Build.SourcesDirectory)/**/nuget-cache-salt.txt'
+    restoreKeys: |
+      nuget | "$(Agent.OS)"
+      nuget
+    path: '$(NUGET_PACKAGES)'
+
+- task: NuGetToolInstaller@0
+  displayName: 'Install NuGet'
+  inputs:
+    versionSpec: '>=4.3.0'
+    checkLatest: true
+
+#- task: DotNetCoreInstaller@0
+#  displayName: 'Install .NET Core'
+#  inputs:
+#    packageType: 'sdk'
+#    version: '3.1.100'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+    feedsToUse: 'config'
+    nugetConfigPath: './src/nuget.config'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '$(solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip" /p:DeployIisAppPath="Default Web Site" -m'
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+- task: VSTest@2
+  displayName: 'Run unit tests'
+  inputs:
+    platform: '$(buildPlatform)'
+    configuration: '$(buildConfiguration)'
+
+
+- task: DotNetCoreCLI@2
+  displayName: 'Package artifacts'
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/*.Shared.*.csproj;!**/*.Tests.csproj'
+    versioningScheme: 'off'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(Build.ArtifactStagingDirectory)'
+    Contents: '**/*.nupkg'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/nuget'
+    CleanTargetFolder: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/nuget'
+    ArtifactName: 'nuget'
+    publishLocation: 'Container'
+

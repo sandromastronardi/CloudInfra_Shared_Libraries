@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net461;net47;net471;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+    <Version>1.0.0</Version>
+    <Description>Common library containing standardized API classes, error responses and enums</Description>
+    <Company>Mastronardi Software</Company>
+    <Copyright>Sandro Mastronardi</Copyright>
+    <PackageProjectUrl>http://www.CompanyName.com/</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Responses\Success\PagedResponse.cs" />
+    <Compile Remove="Responses\Success\PagedResponseEnvelope.cs" />
+    <Compile Remove="Responses\Success\ResponseEnvelope.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Responses\Success\PagedResponse.cs" />
+    <None Include="Responses\Success\PagedResponseEnvelope.cs" />
+    <None Include="Responses\Success\ResponseEnvelope.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Extensions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.WebUtilities" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+  </ItemGroup>
+
+</Project>
