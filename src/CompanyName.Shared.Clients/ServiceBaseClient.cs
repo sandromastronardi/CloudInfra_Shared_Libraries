@@ -209,26 +209,6 @@ namespace CompanyName.Shared.Clients
                                         }
                                     }
                                 }
-                                /* new Auth0.AuthenticationApi.Models.AuthorizationCodeTokenRequest
-
-                            {(
-                                ClientId = "",
-                                ClientSecret = "alwfbJtKA1wktYoY8XivPHwBTv7cghe9nHjfgYuWk2zLCZaXitNL4XpzrVReqIIp",
-                                Code = "",
-                            });*/
-                                //var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
-                                //{
-                                //    Address = tokenEndpoint,
-                                //    ClientId = _identitySettings.ClientId,
-                                //    ClientSecret = _identitySettings.ClientSecret,
-                                //    Scope = _scope
-                                //});
-
-                                //if (tokenResponse.IsError)
-                                //{
-                                //    Log.Error($"Token response error: {tokenResponse.Error}");
-                                //}
-
                                 return tokenResponse;
                             }
                             catch (Exception e)
