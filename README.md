@@ -101,7 +101,7 @@ In your function do:
 
 (`InternalServerErrorErrorResponse` can be found in `Mastronardi.Utils.Mvc` nuget)
 
-## Common
+# Common
 
 The common libraries contain common classes to be used across your microservices.
  
