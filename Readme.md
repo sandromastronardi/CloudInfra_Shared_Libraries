@@ -252,24 +252,24 @@ This is how you add the event grid functionality in your `Startup.cs`:
     configuration.GetSection(nameof(EventGridSettings)).Bind(settings);
     });
 
-    When you use the predefined ARM templates from me (https://github.com/sandromastronardi/ARM_Cloud_Infrastructure) the settings for Event Grid will already be added to your function app and they can be loaded with the code above.
-    There are 2 services: The Subscriber and the Publisher.  The Subscriber service can be used to receive message,s the publisher will publish messages to the event grid.
+When you use the predefined ARM templates from me (https://github.com/sandromastronardi/ARM_Cloud_Infrastructure) the settings for Event Grid will already be added to your function app and they can be loaded with the code above.
+There are 2 services: The Subscriber and the Publisher.  The Subscriber service can be used to receive message,s the publisher will publish messages to the event grid.
 
-    We have 2 types of event grid schemas. The models native to Azure, and the CloudEvents schema.  For future compatability with external services the CloudEvents schema is recommended.
+We have 2 types of event grid schemas. The models native to Azure, and the CloudEvents schema.  For future compatability with external services the CloudEvents schema is recommended.
 
-    When you want to use the default these are the services to use
-    *  `EventGridSubscriberService` and the `IEventGridSubscriberService`  interface
-    *  `EventGridPublisherService`
+When you want to use the default these are the services to use
+*  `EventGridSubscriberService` and the `IEventGridSubscriberService`  interface
+*  `EventGridPublisherService`
 
-    When you want to opt for the Cloud Events schema you use these services:
-    *  `CloudEventsSubscriberService` and the `ICloudEventsSubscriberService` interface
-    *  `CloudEventsPublisherService`
+When you want to opt for the Cloud Events schema you use these services:
+*  `CloudEventsSubscriberService` and the `ICloudEventsSubscriberService` interface
+*  `CloudEventsPublisherService`
 
-    To publish, for both schema's, you configure the `EventGridTopicEndpoint` appsetting.  This is done automatically when you use my ARM templates.
-    The `EventGridTopicKey` is for authentication and `EventGridTopic` is the topic you want to publish your message to.
-    To subscribe there are currently 2 interfaces, and also 2 services.
+To publish, for both schema's, you configure the `EventGridTopicEndpoint` appsetting.  This is done automatically when you use my ARM templates.
+The `EventGridTopicKey` is for authentication and `EventGridTopic` is the topic you want to publish your message to.
+To subscribe there are currently 2 interfaces, and also 2 services.
 
-    To use the CloudEvents schema you need an `OPTIONS` handler like this:
+To use the CloudEvents schema you need an `OPTIONS` handler like this:
 
     private readonly string[] eventEndpoints = new string[]{
     "downloader",
@@ -288,50 +288,49 @@ This is how you add the event grid functionality in your `Startup.cs`:
         {
         try
         {
-        if (!eventEndpoints.Contains(path, StringComparer.OrdinalIgnoreCase))
-        {
-        var error = path + " is invalid for this handler";
-        log.LogCritical(error);
-        throw new InvalidOperationException(error);
-        }
-        var response = await _eventGridSubscriberService.HandleSubscriptionValidationEvent(req);
-        return response;
+            if (!eventEndpoints.Contains(path, StringComparer.OrdinalIgnoreCase))
+            {
+                var error = path + " is invalid for this handler";
+                log.LogCritical(error);
+                throw new InvalidOperationException(error);
+            }
+            var response = await _eventGridSubscriberService.HandleSubscriptionValidationEvent(req);
+            return response;
         }
         catch (Exception ex)
         {
-        log.LogError(ex.Demystify(), "Unhandled exception");
-        return await Task.FromResult(req.CreateResponse(HttpStatusCode.InternalServerError, new InternalServerErrorErrorResponse(ex.Message)));
+            log.LogError(ex.Demystify(), "Unhandled exception");
+            return await Task.FromResult(req.CreateResponse(HttpStatusCode.InternalServerError, new InternalServerErrorErrorResponse(ex.Message)));
         }
-        }
+    }
 
 This example allows multiple endpoints to exist for validation, you can ofcourse make one for each path you want, but like this everything after eventhandlers/* will be able to validate.
 
 A function like below can deconstruct the message for you:
 
-        try
-        {
+    try
+    {
         var (eventGridEvent, userId, _) = _eventGridSubscriberService.DeconstructEventGridMessage(req);
 
         if (eventGridEvent.Type == EventTypes.Customer.CustomerDeleted)
         {
-        // cleanup of customer data
+            // cleanup of customer data
         }else if(eventGridEvent.Type == EventTypes.Partner.PartnerDeleted)
         {
-        // cleanup of partner data
+            // cleanup of partner data
         }else if(eventGridEvent.Type == EventTypes.Users.UserCreated)
         {
-        // cleanup of user data
+            // cleanup of user data
         }
         _eventGridSubscriberService.OperationCompleted(true);
         return new OkResult();
-        }
-        catch (Exception ex)
-        {
+    }
+    catch (Exception ex)
+    {
         log.LogError(ex.Demystify(), "Unhandled exception");
         _eventGridSubscriberService.OperationCompleted(false);
         return new InternalServerErrorObjectResult(new InternalServerErrorErrorResponse(ex.Message));
-        }
-        }
+    }
 
 the `OperationCompleted` method can be called to finalize the operation... This has nothing to do with finalizing the message itself, as this is done with a 200 status code, but it finalizes the operation for logging telemetry.
 This is usefull for tracking operations across services.
@@ -342,16 +341,16 @@ In the `EventTypes` class you can define all event types your application suppor
 
         public static class EventTypes
         {
-        public const string SystemEventIdentity = "System";
-        public static class Users
-        {
-        public const string UserCreated = nameof(UserCreated);
-        public const string UserDeleted = nameof(UserDeleted);
-        public const string UserUpdated = nameof(UserUpdated);
-        public const string UserDisabled = nameof(UserDisabled);
-        public const string UserEnabled = nameof(UserEnabled);
-        public const string UserLoggedIn = nameof(UserLoggedIn);
-        }
+            public const string SystemEventIdentity = "System";
+            public static class Users
+            {
+                public const string UserCreated = nameof(UserCreated);
+                public const string UserDeleted = nameof(UserDeleted);
+                public const string UserUpdated = nameof(UserUpdated);
+                public const string UserDisabled = nameof(UserDisabled);
+                public const string UserEnabled = nameof(UserEnabled);
+                public const string UserLoggedIn = nameof(UserLoggedIn);
+            }
         }
 
         ...
@@ -392,46 +391,46 @@ This is what a UserCreated event looks like:
 
         public class UserCreatedEventData : CreatedEventBase
         {
-        public UserCreatedEventData() { }
-        public UserCreatedEventData(string id) : base(id)
-        {
-        Source = new Uri($"users/{id}", UriKind.Relative);
-        }
+            public UserCreatedEventData() { }
+            public UserCreatedEventData(string id) : base(id)
+            {
+                Source = new Uri($"users/{id}", UriKind.Relative);
+            }
         }
 
 it contains the path for the object with its id, and it will contain the ID in the parent class:
 
         public abstract class CreatedEventBase : EventBase , IEventMessage
         {
-        public CreatedEventBase() { }
-        public CreatedEventBase(string id) : base(id)
-        {
-        }
-        public string Subject => Source.ToString();
+            public CreatedEventBase() { }
+            public CreatedEventBase(string id) : base(id)
+            {
+            }
+            public string Subject => Source.ToString();
 
-        public string CreatedBy { get; set; }
-        public DateTime CreatedOn { get; set; }
+            public string CreatedBy { get; set; }
+            public DateTime CreatedOn { get; set; }
         }
 
 And the `EventBase` contains even more generic information for your events:
 
         public abstract class EventBase
         {
-        protected string _subject;
-        public EventBase() { }
-        public EventBase(string id)
-        {
-        Guid guidId;
-        if (id != null && Guid.TryParse(id, out guidId))
-        {
-        Id = guidId;
-        }
-        }
-        public Guid Id { get; set; }
-        public Uri Source { get; set; }
-        public Guid UserId { get; set; }
-        public string OperationId { get; set; }
-        public string OperationParentId { get; set; }
+            protected string _subject;
+            public EventBase() { }
+            public EventBase(string id)
+            {
+                Guid guidId;
+                if (id != null && Guid.TryParse(id, out guidId))
+                {
+                    Id = guidId;
+                }
+            }
+            public Guid Id { get; set; }
+            public Uri Source { get; set; }
+            public Guid UserId { get; set; }
+            public string OperationId { get; set; }
+            public string OperationParentId { get; set; }
         }
 
 it contains the `Id` here, as well as the `UserId` of the user doing the action and an `OperationId` and `OperationParentId` for tracking telemetry across services.
@@ -458,9 +457,8 @@ The best way to 'detect' a change is to use an event store, that way you can hav
         ConnectionStringSetting = "CosmosDB",
         LeaseCollectionName = "leases",
         LeaseCollectionPrefix = "partnerUpdateEvents",
-        CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document>
-            input,
-            ILogger log)
+        CreateLeaseCollectionIfNotExists = true)]IReadOnlyList<Document> input,
+        ILogger log)
             {
             if (input != null && input.Count > 0)
             {
