@@ -304,9 +304,9 @@ This is how you add the event grid functionality in your `Startup.cs`:
         }
         }
 
-        This example allows multiple endpoints to exist for validation, you can ofcourse make one for each path you want, but like this everything after eventhandlers/* will be able to validate.
+This example allows multiple endpoints to exist for validation, you can ofcourse make one for each path you want, but like this everything after eventhandlers/* will be able to validate.
 
-        A function like below can deconstruct the message for you:
+A function like below can deconstruct the message for you:
 
         try
         {
@@ -333,12 +333,12 @@ This is how you add the event grid functionality in your `Startup.cs`:
         }
         }
 
-        the `OperationCompleted` method can be called to finalize the operation... This has nothing to do with finalizing the message itself, as this is done with a 200 status code, but it finalizes the operation for logging telemetry.
-        This is usefull for tracking operations across services.
+the `OperationCompleted` method can be called to finalize the operation... This has nothing to do with finalizing the message itself, as this is done with a 200 status code, but it finalizes the operation for logging telemetry.
+This is usefull for tracking operations across services.
 
-        ### How to define the type of events
+### How to define the type of events
 
-        In the `EventTypes` class you can define all event types your application supports:
+In the `EventTypes` class you can define all event types your application supports:
 
         public static class EventTypes
         {
@@ -358,37 +358,37 @@ This is how you add the event grid functionality in your `Startup.cs`:
 
         public static class Microsoft
         {
-        public static class Storage
-        {
-        public const string BlobCreated = "Microsoft.Storage.BlobCreated";
-        public const string BlobDeleted = "Microsoft.Storage.BlobDeleted";
-        // more events https://docs.microsoft.com/en-us/azure/event-grid/event-schema-blob-storage
-        }
-        public static class KeyVault
-        {
-        public const string SecretNewVersionCreated  = "Microsoft.KeyVault.SecretNewVersionCreated";
-        public const string SecretNearExpiry         = "Microsoft.KeyVault.SecretNearExpiry";
-        public const string SecretExpired            = "Microsoft.KeyVault.SecretExpired";
-        public const string VaultAccessPolicyChanged = "Microsoft.KeyVault.VaultAccessPolicyChanged";
-        // more events https://docs.microsoft.com/en-us/azure/event-grid/event-schema-key-vault
+            public static class Storage
+            {
+                public const string BlobCreated = "Microsoft.Storage.BlobCreated";
+                public const string BlobDeleted = "Microsoft.Storage.BlobDeleted";
+                // more events https://docs.microsoft.com/en-us/azure/event-grid/event-schema-blob-storage
+            }
+            public static class KeyVault
+            {
+                public const string SecretNewVersionCreated  = "Microsoft.KeyVault.SecretNewVersionCreated";
+                public const string SecretNearExpiry         = "Microsoft.KeyVault.SecretNearExpiry";
+                public const string SecretExpired            = "Microsoft.KeyVault.SecretExpired";
+                public const string VaultAccessPolicyChanged = "Microsoft.KeyVault.VaultAccessPolicyChanged";
+                // more events https://docs.microsoft.com/en-us/azure/event-grid/event-schema-key-vault
 
-        }
-        public static class Devices
-        {
-        public const string DeviceCreated = "Microsoft.Devices.DeviceCreated";
-        public const string DeviceDeleted = "Microsoft.Devices.DeviceDeleted";
-        public const string DeviceConnected = "Microsoft.Devices.DeviceConnected";
-        public const string DeviceDisconnected = "Microsoft.Devices.DeviceDisconnected";
-        public const string DeviceTelemetry = "Microsoft.Devices.DeviceTelemetry";
-        }
+            }
+            public static class Devices
+            {
+                public const string DeviceCreated = "Microsoft.Devices.DeviceCreated";
+                public const string DeviceDeleted = "Microsoft.Devices.DeviceDeleted";
+                public const string DeviceConnected = "Microsoft.Devices.DeviceConnected";
+                public const string DeviceDisconnected = "Microsoft.Devices.DeviceDisconnected";
+                public const string DeviceTelemetry = "Microsoft.Devices.DeviceTelemetry";
+            }
         }
 
-        As you can see there are also the default event names of microsoft as you might want to receive these too.
+As you can see there are also the default event names of microsoft as you might want to receive these too.
 
-        As you can see this is merely the naming of the events and it explains nothing on the data it contains.  These are defined under the folder `EventSchemas` and
-        can be used for both schemas.
+As you can see this is merely the naming of the events and it explains nothing on the data it contains.  These are defined under the folder `EventSchemas` and
+can be used for both schemas.
 
-        This is what a UserCreated event looks like:
+This is what a UserCreated event looks like:
 
         public class UserCreatedEventData : CreatedEventBase
         {
@@ -399,7 +399,7 @@ This is how you add the event grid functionality in your `Startup.cs`:
         }
         }
 
-        it contains the path for the object with its id, and it will contain the ID in the parent class:
+it contains the path for the object with its id, and it will contain the ID in the parent class:
 
         public abstract class CreatedEventBase : EventBase , IEventMessage
         {
@@ -413,7 +413,7 @@ This is how you add the event grid functionality in your `Startup.cs`:
         public DateTime CreatedOn { get; set; }
         }
 
-        And the `EventBase` contains even more generic information for your events:
+And the `EventBase` contains even more generic information for your events:
 
         public abstract class EventBase
         {
@@ -434,22 +434,23 @@ This is how you add the event grid functionality in your `Startup.cs`:
         public string OperationParentId { get; set; }
         }
 
-        it contains the `Id` here, as well as the `UserId` of the user doing the action and an `OperationId` and `OperationParentId` for tracking telemetry across services.
-        This tracking is implemented in here by default for publishing as well as for subscribing, but you need to call the `OperationCompleted` method at the end with True for successfull completion, and false for unsuccessfull completion.
+it contains the `Id` here, as well as the `UserId` of the user doing the action and an `OperationId` and `OperationParentId` for tracking telemetry across services.
+This tracking is implemented in here by default for publishing as well as for subscribing, but you need to call the `OperationCompleted` method at the end with True for successfull completion, and false for unsuccessfull completion.
 
-        You can create as many Events and EventSchemas as your application needs. This should be overseen by an event architect who makes sure no weed grows in between the events.
+You can create as many Events and EventSchemas as your application needs. This should be overseen by an event architect who makes sure no weed grows in between the events.
 
-        ### How to send events after saving
+### How to send events after saving
 
-        The best way to 'detect' a change is to use an event store, that way you can have your WorkerApi trigger on the event from the event store by listening to your Change Feed from CosmosDB and then send your events to the grid.
+The best way to 'detect' a change is to use an event store, that way you can have your WorkerApi trigger on the event from the event store by listening to your Change Feed from CosmosDB and then send your events to the grid.
 
         private string GetEventName(string evt)
         {
-        if (evt == null) return null;
-        var fqdn = evt.Split(',')[0];
-        var eventName = fqdn.Split('.').Last();
-        return eventName?.Trim();
+            if (evt == null) return null;
+            var fqdn = evt.Split(',')[0];
+            var eventName = fqdn.Split('.').Last();
+            return eventName?.Trim();
         }
+
         [FunctionName(nameof(CosmosUpdateEventTrigger))]
         public async Task CosmosUpdateEventTrigger([CosmosDBTrigger(
         databaseName:"%CosmosDBDatabase%",
@@ -463,101 +464,95 @@ This is how you add the event grid functionality in your `Startup.cs`:
             {
             if (input != null && input.Count > 0)
             {
-            log.LogInformation("Documents modified " + input.Count);
-            foreach (Document doc in input)
-            {
-            if (doc.GetPropertyValue<string>
-                ("DocumentType") == "Event")
+                log.LogInformation("Documents modified " + input.Count);
+                foreach (Document doc in input)
                 {
-                if (doc.Id.StartsWith("partner-"))
-                {
-                var stream = doc.GetPropertyValue<string>
-                    ("StreamId");
-                    var version = doc.GetPropertyValue<ulong>
-                        ("Version");
-                        var eventName = GetEventName(doc.GetPropertyValue<string>
-                            ("BodyType"));
+                    if (doc.GetPropertyValue<string>("DocumentType") == "Event")
+                    {
+                        if (doc.Id.StartsWith("partner-"))
+                        {
+                            var stream = doc.GetPropertyValue<string>("StreamId");
+                            var version = doc.GetPropertyValue<ulong>("Version");
+                            var eventName = GetEventName(doc.GetPropertyValue<string>("BodyType"));
                             var partner = await _partnerEventRepository.GetPartner(stream, version);
 
                             switch (eventName)
                             {
-                            case nameof(PartnerCreatedEvent):
-                            await _eventSender.PostEventAsync(EventTypes.Partner.PartnerCreated, new PartnerCreatedEventData(new Guid(partner.Id))
-                            {
-                            CreatedOn = partner.CreatedOn,
-                            CreatedBy = partner.CreatedBy.ToString(),
-                            UserId = partner.CreatedBy
-                            }); break;
-                            case nameof(PartnerDeletedEvent):
-                            await _eventSender.PostEventAsync(EventTypes.Partner.PartnerDeleted, new PartnerDeletedEventData(new Guid(partner.Id))
-                            {
-                            DeletedBy = partner.ModifiedBy.ToString(),
-                            DeletedOn = partner.ModifiedOn,
-                            UserId = partner.ModifiedBy
-                            }); break;
-                            case nameof(PartnerAbandonedEvent):
-                            await _eventSender.PostEventAsync(EventTypes.Partner.PartnerAbandoned, new PartnerAbandonedEventData(new Guid(partner.Id))
-                            {
-                            AbandonedBy = partner.ModifiedBy.ToString(),
-                            AbandonedOn = partner.ModifiedOn,
-                            UserId = partner.ModifiedBy
+                                case nameof(PartnerCreatedEvent):
+                                    await _eventSender.PostEventAsync(EventTypes.Partner.PartnerCreated, new PartnerCreatedEventData(new Guid(partner.Id))
+                                    {
+                                    CreatedOn = partner.CreatedOn,
+                                    CreatedBy = partner.CreatedBy.ToString(),
+                                    UserId = partner.CreatedBy
+                                    }); break;
+                                case nameof(PartnerDeletedEvent):
+                                    await _eventSender.PostEventAsync(EventTypes.Partner.PartnerDeleted, new PartnerDeletedEventData(new Guid(partner.Id))
+                                    {
+                                    DeletedBy = partner.ModifiedBy.ToString(),
+                                    DeletedOn = partner.ModifiedOn,
+                                    UserId = partner.ModifiedBy
+                                    }); break;
+                                case nameof(PartnerAbandonedEvent):
+                                    await _eventSender.PostEventAsync(EventTypes.Partner.PartnerAbandoned, new PartnerAbandonedEventData(new Guid(partner.Id))
+                                    {
+                                    AbandonedBy = partner.ModifiedBy.ToString(),
+                                    AbandonedOn = partner.ModifiedOn,
+                                    UserId = partner.ModifiedBy
 
-                            }); break;
-                            case nameof(PartnerDisabledEvent):
-                            await _eventSender.PostEventAsync(EventTypes.Partner.PartnerDisabled, new PartnerDisabledEventData(new Guid(partner.Id))
-                            {
-                            DisabledBy = partner.ModifiedBy.ToString(),
-                            DisabledOn = partner.ModifiedOn,
-                            UserId = partner.ModifiedBy
-                            }); break;
+                                    }); break;
+                                case nameof(PartnerDisabledEvent):
+                                    await _eventSender.PostEventAsync(EventTypes.Partner.PartnerDisabled, new PartnerDisabledEventData(new Guid(partner.Id))
+                                    {
+                                    DisabledBy = partner.ModifiedBy.ToString(),
+                                    DisabledOn = partner.ModifiedOn,
+                                    UserId = partner.ModifiedBy
+                                    }); break;
                             default:
-                            log.LogWarning($"Event {eventName} not handled");break;
+                                    log.LogWarning($"Event {eventName} not handled");break;
                             }
-                            }
-                            }
-                            }
-                            }
-                            }
+                        }
+                    }
+                }
+            }
+        }
 
-                            `_eventSender` is your publisher with which you send your events to the grid. As you can see all eents are detected and trigger the correct event to be sent.
-                            It fills the information it needs and will send the event to the grid.  It uses the version because when 2 events are triggered after eachother, it makes sure it sends the current information relevant for this event.
-                            Remember, your receiving end must not assume the last one is the most recent one, it must make sure it can receive the message multiple times too... (retries)
-                            Best is to check the date modified on the receiving end to make sure it is not replayed...
+`_eventSender` is your publisher with which you send your events to the grid. As you can see all eents are detected and trigger the correct event to be sent.
+It fills the information it needs and will send the event to the grid.  It uses the version because when 2 events are triggered after eachother, it makes sure it sends the current information relevant for this event.
+Remember, your receiving end must not assume the last one is the most recent one, it must make sure it can receive the message multiple times too... (retries)
+Best is to check the date modified on the receiving end to make sure it is not replayed...
 
-                            ## Event Store
+## Event Store
 
-                            Eventstores are a way of storing data without ever removing old date and this way keeping history of all your changes.  Doing this with the Azure CosmosDB is easy peasy but you need a good library to do this.
-                            This library uses `Eveneum` at the base and this implementation is the layer over it.
+Eventstores are a way of storing data without ever removing old date and this way keeping history of all your changes.  Doing this with the Azure CosmosDB is easy peasy but you need a good library to do this.
+This library uses `Eveneum` at the base and this implementation is the layer over it.
 
-                            First there are 3 configuration values:
+First there are 3 configuration values:
 
-                            *  `EventStore:Database` (or: `EventStore__Database`)
-                            *  `EventStore:Collection` (or: `EventStore__Collection`)
-                            *  `EventStore:ConnectionString` (or: `EventStore__ConnectionString`)
+*  `EventStore:Database` (or: `EventStore__Database`)
+*  `EventStore:Collection` (or: `EventStore__Collection`)
+*  `EventStore:ConnectionString` (or: `EventStore__ConnectionString`)
 
-                            In Database you set the name for the database, in Collection the collection inside that datbase and ConnectionString is the connection string for connecting to CosmosDB
+In Database you set the name for the database, in Collection the collection inside that datbase and ConnectionString is the connection string for connecting to CosmosDB
 
-                            You use the `EventStoreFactory`  (implements interface `IEventStoreFactory`) to get your event store:
-                            Use this method: `GetEventStore()`
+You use the `EventStoreFactory`  (implements interface `IEventStoreFactory`) to get your event store:
+Use this method: `GetEventStore()`
 
-                            A better way to do this is to use the `EventStoreRepository` (implements interface `IEventStoreRepository`)
-                            This wraps the EventStore and also adds telemetry tracking (for example when you want to keep track of the change in the Changefeed of CosmosDB)
+A better way to do this is to use the `EventStoreRepository` (implements interface `IEventStoreRepository`)
+This wraps the EventStore and also adds telemetry tracking (for example when you want to keep track of the change in the Changefeed of CosmosDB)
 
-                            You can:
+You can:
 
-                            `AddEventAsync(string streamId, object body, object metadata = null)`
-                            If you add your own MetaData object it will not be able to track your changes, but if you inherit from MetaData this function will also add the operationId's
+`AddEventAsync(string streamId, object body, object metadata = null)`
+If you add your own MetaData object it will not be able to track your changes, but if you inherit from MetaData this function will also add the operationId's
 
-                            Other operations are
-                            *  `public async Task<Response>
-                                AddSnapshot(string streamId, ulong version, object snapshot)`
-                                *  `public async Task<Response>
-                                    DeleteSnapshots(string streamId, ulong version)`
-                                    *  `public async Task<List<StreamHeader>> GetStreamHeaders()`
-  *  `public async Task<Stream?> GetStream(string streamId)`
-  *  `public async Task<DeleteResponse> DeleteStream(string streamId)`
-  *  `public async Task<List<EventData>> GetEvents(string streamId)`
-  *  `private async Task<ulong?> GetStreamVersionAsync(string streamId)`
+Other operations are
+*  `public async Task<Response> AddSnapshot(string streamId, ulong version, object snapshot)`
+*  `public async Task<Response> DeleteSnapshots(string streamId, ulong version)`
+*  `public async Task<List<StreamHeader>> GetStreamHeaders()`
+*  `public async Task<Stream?> GetStream(string streamId)`
+*  `public async Task<DeleteResponse> DeleteStream(string streamId)`
+*  `public async Task<List<EventData>> GetEvents(string streamId)`
+*  `private async Task<ulong?> GetStreamVersionAsync(string streamId)`
 
 A stream is a list of changes, but ofcourse when you want to browse trough the current version you might want to project this into one object or record.
 This can be done by listening to the CosmosDB Changefeed and save it as one record (either in another CosmosDB Collection or a Sql Database) (see at Creating your repository)
