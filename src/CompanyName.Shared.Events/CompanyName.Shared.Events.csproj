@@ -15,6 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EditorConfigFiles Include=".editorconfig" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Azure.Messaging.EventGrid" Version="4.3.0" />
     <PackageReference Include="CloudNative.CloudEvents" Version="2.0.0-beta.1.1" />
     <PackageReference Include="Microsoft.ApplicationInsights" Version="2.17.0" />

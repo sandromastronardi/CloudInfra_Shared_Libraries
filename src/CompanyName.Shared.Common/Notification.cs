@@ -1,4 +1,7 @@
-﻿namespace CompanyName.Shared.Common
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+namespace CompanyName.Shared.Common
 {
     public class Notification {
         public NotificationLevel Level { get; set; }

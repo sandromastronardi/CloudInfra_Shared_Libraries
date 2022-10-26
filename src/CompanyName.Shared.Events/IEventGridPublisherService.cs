@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.Azure.EventGrid;
@@ -15,5 +18,4 @@ namespace CompanyName.Shared.Events
         Task PostEventAsync<T>(string type, T payload, string topic = null) where T : EventSchemas.IEventMessage;
         Task PostEventAsync<T>(string type, string subject, T payload, string topic = null);
     }
-
-    }
+}

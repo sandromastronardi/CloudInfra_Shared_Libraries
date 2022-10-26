@@ -106,6 +106,15 @@
           "Newtonsoft.Json": "11.0.2"
         }
       },
+      "Mastronardi.Utils.Authentication": {
+        "type": "Transitive",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        }
+      },
       "Microsoft.ApplicationInsights": {
         "type": "Transitive",
         "resolved": "2.17.0",
@@ -1947,34 +1956,35 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
-      "CompanyName.shared.authentication": {
+      "companyname.shared.authentication": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc": "2.2.0",
-          "Microsoft.IdentityModel.Tokens": "5.6.0",
-          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+          "Mastronardi.Utils.Authentication": "[1.0.0.3, )",
+          "Microsoft.AspNetCore.Mvc": "[2.2.0, )",
+          "Microsoft.IdentityModel.Tokens": "[5.6.0, )",
+          "System.IdentityModel.Tokens.Jwt": "[5.6.0, )"
         }
       },
-      "CompanyName.shared.common": {
+      "companyname.shared.common": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
-          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
-          "Newtonsoft.Json": "12.0.3",
-          "System.ComponentModel.Annotations": "4.7.0"
+          "Microsoft.AspNetCore.Http.Extensions": "[2.2.0, )",
+          "Microsoft.AspNetCore.WebUtilities": "[2.2.0, )",
+          "Newtonsoft.Json": "[12.0.3, )",
+          "System.ComponentModel.Annotations": "[4.7.0, )"
         }
       },
-      "CompanyName.shared.events": {
+      "companyname.shared.events": {
         "type": "Project",
         "dependencies": {
-          "Azure.Messaging.EventGrid": "4.3.0",
-          "CloudNative.CloudEvents": "2.0.0-beta.1.1",
-          "Microsoft.ApplicationInsights": "2.17.0",
-          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
-          "Microsoft.Azure.EventGrid": "3.2.0",
-          "Microsoft.Extensions.Caching.Abstractions": "3.1.12",
-          "Microsoft.Extensions.Options": "3.1.12"
+          "Azure.Messaging.EventGrid": "[4.3.0, )",
+          "CloudNative.CloudEvents": "[2.0.0-beta.1.1, )",
+          "Microsoft.ApplicationInsights": "[2.17.0, )",
+          "Microsoft.AspNetCore.Mvc.Abstractions": "[2.2.0, )",
+          "Microsoft.AspNetCore.Mvc.Core": "[2.2.5, )",
+          "Microsoft.Azure.EventGrid": "[3.2.0, )",
+          "Microsoft.Extensions.Caching.Abstractions": "[3.1.12, )",
+          "Microsoft.Extensions.Options": "[3.1.12, )"
         }
       }
     },
@@ -2069,6 +2079,16 @@
         "contentHash": "y1vQIVXcOSog1JDrKSDEgx22u6VnhtyzWRI1n9ikYrNcWGp/ZZJK5l71KERt57X9N0624mvDn8nFHgnsOQQfAA==",
         "dependencies": {
           "Newtonsoft.Json": "11.0.2"
+        }
+      },
+      "Mastronardi.Utils.Authentication": {
+        "type": "Transitive",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
         }
       },
       "Microsoft.ApplicationInsights": {
@@ -3965,34 +3985,35 @@
           "System.Xml.XPath": "4.3.0"
         }
       },
-      "CompanyName.shared.authentication": {
+      "companyname.shared.authentication": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Mvc": "2.2.0",
-          "Microsoft.IdentityModel.Tokens": "5.6.0",
-          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+          "Mastronardi.Utils.Authentication": "[1.0.0.3, )",
+          "Microsoft.AspNetCore.Mvc": "[2.2.0, )",
+          "Microsoft.IdentityModel.Tokens": "[5.6.0, )",
+          "System.IdentityModel.Tokens.Jwt": "[5.6.0, )"
         }
       },
-      "CompanyName.shared.common": {
+      "companyname.shared.common": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
-          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
-          "Newtonsoft.Json": "12.0.3",
-          "System.ComponentModel.Annotations": "4.7.0"
+          "Microsoft.AspNetCore.Http.Extensions": "[2.2.0, )",
+          "Microsoft.AspNetCore.WebUtilities": "[2.2.0, )",
+          "Newtonsoft.Json": "[12.0.3, )",
+          "System.ComponentModel.Annotations": "[4.7.0, )"
         }
       },
-      "CompanyName.shared.events": {
+      "companyname.shared.events": {
         "type": "Project",
         "dependencies": {
-          "Azure.Messaging.EventGrid": "4.3.0",
-          "CloudNative.CloudEvents": "2.0.0-beta.1.1",
-          "Microsoft.ApplicationInsights": "2.17.0",
-          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
-          "Microsoft.Azure.EventGrid": "3.2.0",
-          "Microsoft.Extensions.Caching.Abstractions": "3.1.12",
-          "Microsoft.Extensions.Options": "3.1.12"
+          "Azure.Messaging.EventGrid": "[4.3.0, )",
+          "CloudNative.CloudEvents": "[2.0.0-beta.1.1, )",
+          "Microsoft.ApplicationInsights": "[2.17.0, )",
+          "Microsoft.AspNetCore.Mvc.Abstractions": "[2.2.0, )",
+          "Microsoft.AspNetCore.Mvc.Core": "[2.2.5, )",
+          "Microsoft.Azure.EventGrid": "[3.2.0, )",
+          "Microsoft.Extensions.Caching.Abstractions": "[3.1.12, )",
+          "Microsoft.Extensions.Options": "[3.1.12, )"
         }
       }
     },
@@ -4049,6 +4070,15 @@
           "Microsoft.IdentityModel.JsonWebTokens": "5.6.0",
           "Microsoft.IdentityModel.Tokens": "5.6.0",
           "Newtonsoft.Json": "10.0.1"
+        }
+      },
+      "Mastronardi.Utils.Authentication": {
+        "type": "Transitive",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
         }
       },
       "Microsoft.AspNetCore.Http.Abstractions": {
@@ -4477,20 +4507,21 @@
         "resolved": "4.3.0",
         "contentHash": "5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ=="
       },
-      "CompanyName.shared.authentication": {
+      "companyname.shared.authentication": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.IdentityModel.Tokens": "5.6.0",
-          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+          "Mastronardi.Utils.Authentication": "[1.0.0.3, )",
+          "Microsoft.IdentityModel.Tokens": "[5.6.0, )",
+          "System.IdentityModel.Tokens.Jwt": "[5.6.0, )"
         }
       },
-      "CompanyName.shared.common": {
+      "companyname.shared.common": {
         "type": "Project",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
-          "Microsoft.AspNetCore.WebUtilities": "2.2.0",
-          "Newtonsoft.Json": "12.0.3",
-          "System.ComponentModel.Annotations": "4.7.0"
+          "Microsoft.AspNetCore.Http.Extensions": "[2.2.0, )",
+          "Microsoft.AspNetCore.WebUtilities": "[2.2.0, )",
+          "Newtonsoft.Json": "[12.0.3, )",
+          "System.ComponentModel.Annotations": "[4.7.0, )"
         }
       }
     }

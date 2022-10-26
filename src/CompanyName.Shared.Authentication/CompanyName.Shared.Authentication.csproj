@@ -38,4 +38,28 @@
     </Reference>
   </ItemGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)' == 'net47'">
+    <PackageReference Include="Mastronardi.Utils.Authentication">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Mastronardi.Utils.Authentication">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.1'">
+    <PackageReference Include="Mastronardi.Utils.Authentication">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'">
+    <PackageReference Include="Mastronardi.Utils.Authentication">
+      <Version>1.0.0.3</Version>
+    </PackageReference>
+  </ItemGroup>
+
 </Project>

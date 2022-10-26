@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http.Extensions;
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.WebUtilities;
 using System;
 using System.Collections.Generic;

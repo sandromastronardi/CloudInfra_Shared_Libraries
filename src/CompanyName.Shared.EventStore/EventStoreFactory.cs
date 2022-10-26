@@ -1,4 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Threading.Tasks;
 using Eveneum;

@@ -1,4 +1,7 @@
-﻿using Eveneum;
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+using Eveneum;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;

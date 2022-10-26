@@ -10,15 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Responses\Success\PagedResponse.cs" />
-    <Compile Remove="Responses\Success\PagedResponseEnvelope.cs" />
-    <Compile Remove="Responses\Success\ResponseEnvelope.cs" />
+    <None Remove=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Responses\Success\PagedResponse.cs" />
-    <None Include="Responses\Success\PagedResponseEnvelope.cs" />
-    <None Include="Responses\Success\ResponseEnvelope.cs" />
+    <EditorConfigFiles Include=".editorconfig" />
   </ItemGroup>
 
   <ItemGroup>

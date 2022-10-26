@@ -1,3 +1,6 @@
+// Copyright (c) Mastronardi Software (mastrosoft.com). All Rights Reserved.
+// Licensed under Mozilla Public License, Version 2.0
+
 using CompanyName.Shared.Common;
 using System;
 using System.Net;

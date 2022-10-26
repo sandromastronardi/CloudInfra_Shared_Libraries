@@ -2,6 +2,16 @@
   "version": 1,
   "dependencies": {
     ".NETCoreApp,Version=v2.1": {
+      "Mastronardi.Utils.Authentication": {
+        "type": "Direct",
+        "requested": "[1.0.0.3, )",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        }
+      },
       "Microsoft.AspNetCore.Mvc": {
         "type": "Direct",
         "requested": "[2.2.0, )",
@@ -1705,6 +1715,17 @@
       }
     },
     ".NETCoreApp,Version=v3.1": {
+      "Mastronardi.Utils.Authentication": {
+        "type": "Direct",
+        "requested": "[1.0.0.3, )",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc": "2.2.0",
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        }
+      },
       "Microsoft.AspNetCore.Mvc": {
         "type": "Direct",
         "requested": "[2.2.0, )",
@@ -3566,6 +3587,16 @@
       }
     },
     ".NETFramework,Version=v4.7": {
+      "Mastronardi.Utils.Authentication": {
+        "type": "Direct",
+        "requested": "[1.0.0.3, )",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        }
+      },
       "Microsoft.IdentityModel.Tokens": {
         "type": "Direct",
         "requested": "[5.6.0, )",
@@ -3608,6 +3639,16 @@
       }
     },
     ".NETStandard,Version=v2.0": {
+      "Mastronardi.Utils.Authentication": {
+        "type": "Direct",
+        "requested": "[1.0.0.3, )",
+        "resolved": "1.0.0.3",
+        "contentHash": "jOh6oXPjWQffgd+yE1xmeb80rJ+jY8blpHMS6STQTHEmKxnrkJG5V6SNllLzhgUr/lXmfIGSN9DC2l/Q/Xmq0Q==",
+        "dependencies": {
+          "Microsoft.IdentityModel.Tokens": "5.6.0",
+          "System.IdentityModel.Tokens.Jwt": "5.6.0"
+        }
+      },
       "Microsoft.AspNetCore.Mvc": {
         "type": "Direct",
         "requested": "[2.2.0, )",
